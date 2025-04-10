@@ -1,0 +1,18 @@
+version: '3'
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./outputs:/app/outputs
+
+  python-runner:
+    build: ./docker/python_runner
+    volumes:
+      - ./outputs:/app/output
+
+  r-runner:
+    build: ./docker/r_runner
+    volumes:
+      - ./outputs:/app/output
