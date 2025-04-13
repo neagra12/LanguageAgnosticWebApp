@@ -1,4 +1,5 @@
 version: '3'
+
 services:
   backend:
     build: ./backend
@@ -6,6 +7,11 @@ services:
       - "8000:8000"
     volumes:
       - ./outputs:/app/outputs
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
 
   python-runner:
     build: ./docker/python_runner
@@ -15,4 +21,5 @@ services:
   r-runner:
     build: ./docker/r_runner
     volumes:
-      - ./outputs:/app/output
+      - ./outputs:/app/outputs
+    restart: always
