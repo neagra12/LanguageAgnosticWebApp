@@ -56,6 +56,21 @@ fig = px.scatter(x=[1, 2, 3], y=[4, 1, 6], title="Interactive Plot")
 fig.write_html(f"{OUTPUT_DIR}/plot.html")
 ```
 
+#### 3D Plot (Plotly)
+```python
+import plotly.graph_objects as go
+import os
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+fig = go.Figure(data=[go.Scatter3d(
+    x=[1, 2, 3],
+    y=[4, 5, 6],
+    z=[7, 8, 9],
+    mode='markers',
+    marker=dict(size=5, color='blue')
+)])
+fig.write_html(f"{OUTPUT_DIR}/plot.html")
+```
+
 ### R
 
 #### Static Plot (ggplot2)
@@ -71,8 +86,17 @@ dev.off()
 #### Interactive Plot (plotly)
 ```r
 library(plotly)
-p <- plot_ly(x = c(1, 2, 3), y = c(4, 2, 5), type = "scatter", mode = "lines+markers")
-htmlwidgets::saveWidget(p, file = file.path(Sys.getenv("OUTPUT_DIR"), "plot.html"))
+library(htmlwidgets)
+fig <- plot_ly(
+  data = iris,
+  x = ~Sepal.Length,
+  y = ~Petal.Length,
+  color = ~Species,
+  type = 'scatter',
+  mode = 'markers'
+)
+output_path <- file.path(Sys.getenv("OUTPUT_DIR", unset = "."), "plot.html")
+saveWidget(fig, file = output_path, selfcontained = FALSE)
 ```
 
 #### 3D Plot (rgl)
@@ -90,7 +114,7 @@ rgl.close()
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/neagra12/LanguageAgnosticWebApp
+git clone https://github.com/neagra12/LanguageAgnosticWebApp.git
 cd LanguageAgnosticWebApp
 ```
 
@@ -109,12 +133,14 @@ docker-compose up --build
 
 ✅ Static Python (matplotlib)  
 ✅ Interactive Python (plotly)  
+✅ 3D Python (plotly)  
 ✅ Static R (ggplot2)  
 ✅ Interactive R (plotly)  
-🔄 Optional 3D (rgl in R)
+✅ 3D R (rgl)
 
-> 
+---
 
 ## 🙌 Contributions & License
 
 MIT License. Made with ❤️ for a technical assessment by Neeha.
+
