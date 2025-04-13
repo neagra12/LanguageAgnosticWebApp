@@ -91,7 +91,7 @@ rgl.close()
 ### 1. Clone the repo
 ```bash
 git clone https://github.com/your-username/language-agnostic-visualizer.git
-cd language-agnostic-visualizer
+cd LanguageAgnosticWebApp
 ```
 
 ### 2. Build and Run
